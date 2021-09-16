@@ -16,6 +16,12 @@ async def test_pwm(dut):
     dut.but_1 <= 0
     dut.but_2 <= 0
     dut.but_3 <= 0
+    dut.but_4 <= 0
+    dut.but_5 <= 0
+    dut.but_6 <= 0
+    dut.but_7 <= 0
+    dut.but_8 <= 0
+    dut.but_9 <= 0
     dut.open  <= 0
 
     await reset(dut)
@@ -30,23 +36,10 @@ async def test_pwm(dut):
     dut.open <= 0
 
     # type the code: 2130
-    dut.but_2 <= 1
-    await RisingEdge(dut.clk)
-
-    dut.but_2 <= 0
-    dut.but_1 <= 1
-    await RisingEdge(dut.clk)
-
-    dut.but_1 <= 0
-    dut.but_3 <= 1
-    await RisingEdge(dut.clk)
-
-    dut.but_3 <= 0
     dut.but_0 <= 1
-    await RisingEdge(dut.clk)
-
-    dut.but_0 <= 0
-    # press open button
+    dut.but_2 <= 1
+    dut.but_4 <= 1
+    dut.but_6 <= 1
     dut.open <= 1
     await RisingEdge(dut.clk)
 

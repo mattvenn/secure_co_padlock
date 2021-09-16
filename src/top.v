@@ -8,38 +8,31 @@ module top (
     input   wire    but_1,
     input   wire    but_2,
     input   wire    but_3,
+    input   wire    but_4,
+    input   wire    but_5,
+    input   wire    but_6,
+    input   wire    but_7,
+    input   wire    but_8,
+    input   wire    but_9,
     input   wire    open,
     output  reg     lock);
-
-    reg [1:0] index;
-    reg [1:0] attempt [3:0];
 
     always @(posedge clk) begin
         if(reset) begin
             lock <= 1'b1;
-            index <= 2'b0;
         end else begin 
-            // if buttons pressed, store and advance index
-            if(but_0) begin
-                attempt[index] <= 2'd0;
-                index <= index + 1'b1;
-            end else if(but_1) begin
-                attempt[index] <= 2'd1;
-                index <= index + 1'b1;
-            end else if(but_2) begin
-                attempt[index] <= 2'd2;
-                index <= index + 1'b1;
-            end else if(but_3) begin
-                attempt[index] <= 2'd3;
-                index <= index + 1'b1;
-            end
-                
-            // if open button pressed, check the code and unlock if correct
+            // if correct buttons pressed, open the lock
             if(open &&
-                attempt[0] == 2 && 
-                attempt[1] == 1 && 
-                attempt[2] == 3 && 
-                attempt[3] == 0)
+                but_0 == 1'b1 &&
+                but_1 == 1'b0 &&
+                but_2 == 1'b1 &&
+                but_3 == 1'b0 &&
+                but_4 == 1'b1 &&
+                but_5 == 1'b0 &&
+                but_6 == 1'b1 &&
+                but_7 == 1'b0 &&
+                but_8 == 1'b0 &&
+                but_9 == 1'b0)
                 lock <= 1'b0;
             else
                 lock <= 1'b1;
