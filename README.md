@@ -19,7 +19,12 @@ in top level openlane directory:
 
 # To extract the netlist
 
-Load the GDS with magic, then type these commands in the tcl window:
+Load the GDS with magic, 
+    
+    cd gds
+    magic top.gds
+
+then type these commands in the tcl window:
 
     extract
     ext2spice lvs
@@ -28,3 +33,6 @@ Load the GDS with magic, then type these commands in the tcl window:
 This will give you a spice file with no blackboxed cells.
 
 # To simulate the netlist
+
+    cd gds
+    ngspice simulation.spice
