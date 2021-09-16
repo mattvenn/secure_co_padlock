@@ -1,11 +1,11 @@
 [*]
 [*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
-[*] Thu Sep 16 14:58:59 2021
+[*] Thu Sep 16 15:13:57 2021
 [*]
-[dumpfile] "/home/matt/work/asic-workshop/course/secure_co_padlock/top.vcd"
-[dumpfile_mtime] "Thu Sep 16 14:58:35 2021"
-[dumpfile_size] 695
-[savefile] "/home/matt/work/asic-workshop/course/secure_co_padlock/top.gtkw"
+[dumpfile] "/home/matt/work/asic-workshop/shuttle2-mpw-two-c/openlane/designs/secure_co_padlock/top.vcd"
+[dumpfile_mtime] "Thu Sep 16 15:13:46 2021"
+[dumpfile_size] 747
+[savefile] "/home/matt/work/asic-workshop/shuttle2-mpw-two-c/openlane/designs/secure_co_padlock/top.gtkw"
 [timestart] 0
 [size] 1456 974
 [pos] -1 -1
@@ -28,6 +28,8 @@ top.but_3
 top.index[1:0]
 @200
 -
+@29
+top.open
 @28
 top.lock
 [pattern_trace] 1

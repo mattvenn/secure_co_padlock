@@ -8,6 +8,7 @@ module top (
     input   wire    but_1,
     input   wire    but_2,
     input   wire    but_3,
+    input   wire    open,
     output  reg     lock);
 
     reg [1:0] index;
@@ -33,8 +34,8 @@ module top (
                 index <= index + 1'b1;
             end
                 
-            // check the code and unlock if correct
-            if(
+            // if open button pressed, check the code and unlock if correct
+            if(open &&
                 attempt[0] == 2 && 
                 attempt[1] == 1 && 
                 attempt[2] == 3 && 
