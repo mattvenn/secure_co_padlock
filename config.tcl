@@ -4,8 +4,8 @@ set ::env(DESIGN_NAME) top
 # Change if needed
 set ::env(VERILOG_FILES) [glob $::env(DESIGN_DIR)/src/*.v]
 
-set ::env(CLOCK_PERIOD) "10.000"
-set ::env(CLOCK_PORT) "clk"
+set ::env(CLOCK_TREE_SYNTH) 0
+set ::env(CLOCK_PORT) ""
 
 set ::env(PL_SKIP_INITIAL_PLACEMENT) 1
 set ::env(PL_RANDOM_GLB_PLACEMENT) 1
