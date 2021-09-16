@@ -41,6 +41,8 @@ module top (
                 attempt[2] == 3 && 
                 attempt[3] == 0)
                 lock <= 1'b0;
+            else
+                lock <= 1'b1;
         end
     end
 endmodule
