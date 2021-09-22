@@ -35,11 +35,17 @@ async def test_pwm(dut):
     assert dut.lock == 1
     dut.open <= 0
 
-    # type the code: 2130
+    # set buttons correctly: 0 2 4 6
     dut.but_0 <= 1
+    dut.but_1 <= 0
     dut.but_2 <= 1
+    dut.but_3 <= 0
     dut.but_4 <= 1
+    dut.but_5 <= 0
     dut.but_6 <= 1
+    dut.but_7 <= 0
+    dut.but_8 <= 0
+    dut.but_9 <= 0
 
     # the button combo is registered
     await RisingEdge(dut.clk)
