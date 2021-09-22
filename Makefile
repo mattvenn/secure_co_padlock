@@ -15,6 +15,9 @@ test:
 show_%: %.vcd %.gtkw
 	gtkwave $^
 
+show_synth_%: src/%.v
+	yosys -p "read_verilog $<; proc; opt; show -colors 2 -width -signed"
+
 lint:
 	verible-verilog-lint src/*v --rules_config verible.rules
 

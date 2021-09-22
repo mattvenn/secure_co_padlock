@@ -1,6 +1,7 @@
 Standard cell Simulation
 
 .include "/home/matt/work/asic-workshop/shuttle2-mpw-two-c/pdk/skywater-pdk/libraries/sky130_fd_pr/latest/models/corners/tt.spice"
+*.include "/home/matt/work/asic-workshop/shuttle2-mpw-two-c/pdk/sky130A/libs.ref/sky130_fd_sc_hd/spice/sky130_fd_sc_hd.spice"
 .include "top.spice"
 
 Xpoc but_0 but_1 but_2 but_3 but_4 but_5 but_6 but_7 but_8 but_9 clk lock open reset VPWR VGND top
@@ -20,31 +21,26 @@ Vbut_7 but_7 VGND 0
 Vbut_8 but_8 VGND 0
 Vbut_9 but_9 VGND 0
 
-* press the open button
-Vopen open VGND 1.8
-
 * create a clock, 4ns period
 * initial v, pulse v, delay, rise, fall, pulse w, period
 Vclk clk VGND pulse(0 1.8 1n 10p 10p 2n 4n)
 
 * create reset
-* start high, for 4ns, rest of the time off
+* start high, for 2ns, rest of the time off
 Vreset reset VGND pulse(0 1.8 0n 10p 10p 2n 20n)
 
 * press the open button
 * start low, wait for 4ns, hold high
-* Vopen open VGND pulse(0 1.8 4n 10p 10p 20n 20n)
+Vopen open VGND pulse(0 1.8 4n 10p 10p 20n 20n)
 
 * setup the transient analysis
-.tran 10p 20n 0
+.tran 50p 13n 0
 
 .control
 run
 set color0 = white
 set color1 = black
-*plot clk, reset, open, lock
-* why is there no lock vector?
-plot lock
+plot clk, reset, open, lock
 .endc
 
 .end

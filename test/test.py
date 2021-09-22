@@ -40,6 +40,9 @@ async def test_pwm(dut):
     dut.but_2 <= 1
     dut.but_4 <= 1
     dut.but_6 <= 1
+
+    # the button combo is registered
+    await RisingEdge(dut.clk)
     dut.open <= 1
     await RisingEdge(dut.clk)
 
