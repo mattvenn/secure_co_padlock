@@ -37,6 +37,7 @@ then type these commands in the tcl window:
     ext2spice
 
 This will give you a spice file with no blackboxed cells.
+Copy the extracted top.spice into the ./gds directory.
 
 # To simulate the netlist
 
@@ -45,14 +46,24 @@ This will give you a spice file with no blackboxed cells.
 
 Takes less than 2 minutes.
 
-Change one of the buttons and resimulate, now the lock stays shut.
-Odd thing I noticed, if button 9 is set wrong, then the lock is open for a few ns before reset.
-Button 8 does what I expect.
+![lock opens with correct combo](pics/correct_combo_open_and_lock.png)
 
-## spice bits
+Change one of the buttons by setting a different voltage and resimulate, now the lock stays shut.
+Odd thing I noticed, if button 9 is set wrong, then the lock is open for a few ns before reset.
+Button 8 does what I expect (lock starts high and stays high).
+
+![lock shut with incorrect combo](pics/wrong_combo_button_8_open_lock.png)
+
+## spice notes
 
     display                 # show all vectors
     plot vector_name        # plot the vector. if you get a message about vector not existing, try putting in quotes
+
+# Reverse engineer the circuit so we know what to hack
+
+todo
+
+![gds](pics/gds.png)
 
 # Insert the trojan
 
@@ -66,9 +77,25 @@ So copy the nfet definition and adapt it to replace the pfet.
 
 Then re-run the simulation and you should see the lock opening even though the combination is still wrong.
 
+![lock open with wrong combo](pics/trojan_open.png)
+
+# Change the GDS
+
+Now we have checked the trojan is going to break the lock as desired, we update the GDS so the masks are created
+with the trojan in place. As we are only changing the N and P diffusion layer masks, this cannot currently be detected
+with a microscope.
+
+Start klayout in edit mode (-e) and find the flip-flop. Select the N diffusion layer nsdm.drawing, and using the box tool,
+draw a box around the output pfet in the top right corner.
+
+![trojan gds](pics/trojan_gds.png)
+
 # Limitations
 
-* spice takes ages to run even on small designs
-* need to do analogue sim as we are doing a hw trojan
-* we are lucky because the gds has cell names that makes them easier to identify
-* after synthesis, logic is optimised so it can be much harder to work out the intent of the design
+* Spice takes ages to run even on small designs. An alternative that is supposed to have better performance is xyce, but I've not tried it.
+* We need to do analogue sim as we want to verify the trojan works
+* We are lucky because the gds has cell names that makes them easier to identify. If we extracted from an unknown PDK it might be harder to trace the cell names
+* After synthesis, logic is optimised so it can be much harder to work out the intent of the design
+* After altering the GDS it would be nice to re-extract the netlist and resimulate, but this doesn't work because magic doesn't recognise the trojan aas a flip flop anymore. 
+* The extraction only works if we have the tech file of the PDK used for the chip. So this makes the hack harder to pull off.
+* Masks are normally made by an external (to the foundry) factory. So we would like to change the GDS files there, but we also need access to the confidential PDK which only the customer and foundry have access to.
