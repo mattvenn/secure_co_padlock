@@ -1,3 +1,7 @@
+# Webinar slides
+
+https://bit.ly/hardware-trojan-webinar 
+
 # Trojan paper
 
 https://iacr.org/archive/ches2013/80860203/80860203.pdf
@@ -90,6 +94,8 @@ draw a box around the output pfet in the top right corner.
 
 ![trojan gds](pics/trojan_gds.png)
 
+todo: re-read the paper and see if need to change both p and n fet.
+
 # Limitations
 
 * Spice takes ages to run even on small designs. An alternative that is supposed to have better performance is xyce, but I've not tried it.
@@ -99,3 +105,4 @@ draw a box around the output pfet in the top right corner.
 * After altering the GDS it would be nice to re-extract the netlist and resimulate, but this doesn't work because magic doesn't recognise the trojan aas a flip flop anymore. 
 * The extraction only works if we have the tech file of the PDK used for the chip. So this makes the hack harder to pull off.
 * Masks are normally made by an external (to the foundry) factory. So we would like to change the GDS files there, but we also need access to the confidential PDK which only the customer and foundry have access to.
+* Amro Tork: In my other life, we used to get the Mask files and check them using an automated tool to make sure they match our design.  For large cooperations to buy your chip, it was a must. You have to have this step in the flow.
