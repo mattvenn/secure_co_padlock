@@ -65,7 +65,7 @@ Button 8 does what I expect (lock starts high and stays high).
 
 # Reverse engineer the circuit so we know what to hack
 
-todo
+You can get a list of the standard cells here: https://antmicro-skywater-pdk-docs.readthedocs.io/en/test-submodules-in-rtd/contents/libraries/sky130_fd_sc_hdll/README.html
 
 ![gds](pics/gds.png)
 
